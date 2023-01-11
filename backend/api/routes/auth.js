@@ -12,6 +12,7 @@ router.post("/register", async (req, res) => {
       email: req.body.email,
       password: hashedPass,
     });
+
     const user = await newUser.save();
     res.status(200).json(user);
   } catch (err) {
@@ -28,7 +29,6 @@ router.post("/login", async (req, res) => {
     const validated = await bcrypt.compare(req.body.password, user.password);
     !validated && res.status(400).json("Wrong credentials!");
 
-    // so user does not recieve password but everything else
     const { password, ...others } = user._doc;
     res.status(200).json(others);
   } catch (err) {
