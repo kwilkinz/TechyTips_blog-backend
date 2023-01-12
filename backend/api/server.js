@@ -6,6 +6,7 @@ const userRoute = require("./routes/users");
 const postRoute = require("./routes/posts");
 const categoryRoute = require("./routes/category");
 const multer = require("multer");
+const path = require("path");
 
 const app = express();
 dotenv.config();
@@ -16,8 +17,6 @@ mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: true,
   })
   .then(console.log("Connected to MongoDB"))
   .catch((err) => console.log(err));
