@@ -7,6 +7,7 @@ const postRoute = require("./routes/posts");
 const categoryRoute = require("./routes/category");
 const multer = require("multer");
 const path = require("path");
+const cors = require("cors");
 
 const app = express();
 dotenv.config();
