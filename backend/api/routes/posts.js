@@ -74,7 +74,7 @@ router.get("/", async (req, res) => {
   try {
     let posts;
     if (username) {
-      posts = await Post.find({ username }).sort({ createdAt: "desc" });
+      posts = await Post.find({ username });
     } else if (catName) {
       posts = await Post.find({
         category: {
@@ -84,7 +84,7 @@ router.get("/", async (req, res) => {
     } else {
       posts = await Post.find();
     }
-    res.status(200).json(posts);
+    res.status(200).json(posts).sort({ createdAt: "desc" });
   } catch (err) {
     res.status(500).json(err);
   }
