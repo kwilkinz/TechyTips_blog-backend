@@ -74,7 +74,7 @@ router.get("/", async (req, res) => {
   try {
     let posts;
     if (username) {
-      posts = await Post.find({ username });
+      posts = await Post.find({ username }).sort({ createdAt: "desc" });
     } else if (catName) {
       posts = await Post.find({
         category: {
