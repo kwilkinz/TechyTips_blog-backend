@@ -5,10 +5,9 @@ const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
 const postRoute = require("./routes/posts");
 const categoryRoute = require("./routes/category");
+const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
-const multer = require("multer");
-const images = requrie("./images");
 
 const app = express();
 dotenv.config();
