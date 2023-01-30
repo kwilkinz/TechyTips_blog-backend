@@ -8,9 +8,7 @@ const categoryRoute = require("./routes/category");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
-let bodyParser = require("body-parser");
 
-app.use(bodyParser.json());
 const app = express();
 dotenv.config();
 app.use(
@@ -19,16 +17,7 @@ app.use(
   })
 );
 app.use(express.json());
-app.use(
-  "/images",
-  express.static(
-    path.join(__dirname, "/images", {
-      setHeaders: function (res, path) {
-        res.type("jpeg");
-      },
-    })
-  )
-);
+app.use("/images", express.static(path.join(__dirname, "/images")));
 
 mongoose
   .connect(process.env.MONGO_URL, {
