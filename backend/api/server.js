@@ -5,18 +5,15 @@ const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
 const postRoute = require("./routes/posts");
 const categoryRoute = require("./routes/category");
-const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
+const multer = require("multer");
 
 const app = express();
 dotenv.config();
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+app.use(cors({ origin: "*" }));
 app.use(express.json());
+
 app.use("/images", express.static(path.join(__dirname, "/images")));
 
 mongoose
@@ -29,7 +26,7 @@ mongoose
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "images");
+    cb(null, "../images");
   },
   filename: (req, file, cb) => {
     cb(null, req.body.name);
@@ -38,7 +35,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 app.post("/api/upload", upload.single("file"), (req, res) => {
-  res.setHeader("content-type", "image/jpeg");
   res.status(200).json("File has been uploaded");
 });
 
