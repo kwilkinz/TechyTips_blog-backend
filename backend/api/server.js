@@ -8,8 +8,9 @@ const categoryRoute = require("./routes/category");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
-const { fstat } = require("fs");
+let bodyParser = require("body-parser");
 
+app.use(bodyParser.json());
 const app = express();
 dotenv.config();
 app.use(
@@ -18,7 +19,28 @@ app.use(
   })
 );
 app.use(express.json());
-app.use("/images/", express.static(path.join(__dirname, "/images/")));
+// app.use(
+//   "/images",
+//   express.static(
+//     path.join(__dirname, "/images", {
+//       setHeaders: function (res, path) {
+//         res.type("jpeg");
+//       },
+//     })
+//   )
+// );
+app.use(
+  "/images",
+  express.static("images", {
+    setHeaders: function (res, path) {
+      res.set("Access-Control-Allow-Origin", "*");
+      res.set("Access-Control-Allow-Headers", "Content-Type,X-Requested-With");
+      res.set("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+      res.type("application/json");
+      res.type("jpg");
+    },
+  })
+);
 
 mongoose
   .connect(process.env.MONGO_URL, {
