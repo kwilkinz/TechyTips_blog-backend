@@ -18,7 +18,7 @@ app.use(
   })
 );
 app.use(express.json());
-app.use("/images", express.static(path.join(__dirname, "/images")));
+app.use("/images/", express.static(path.join(__dirname, "/images/")));
 
 mongoose
   .connect(process.env.MONGO_URL, {
