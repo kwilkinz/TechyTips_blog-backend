@@ -8,6 +8,7 @@ const categoryRoute = require("./routes/category");
 const path = require("path");
 const cors = require("cors");
 const multer = require("multer");
+const images = requrie("./images");
 
 const app = express();
 dotenv.config();
@@ -26,7 +27,7 @@ mongoose
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "../images");
+    cb(null, "./images");
   },
   filename: (req, file, cb) => {
     cb(null, req.body.name);
